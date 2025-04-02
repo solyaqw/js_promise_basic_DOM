@@ -4,19 +4,19 @@ const promise1 = new Promise((resolve, reject) => {
   const logoElement = document.querySelector('.logo');
 
   if (!logoElement) {
-    reject(new Error('Елемент з класом .logo не знайдено'));
+    reject(new Error('Promise was rejected!'));
 
     return;
   }
 
   logoElement.addEventListener('click', () => {
-    resolve('Клікнуто на логотип');
+    resolve('Promise was resolved!');
   });
 });
 
 const promise2 = new Promise((resolve, reject) => {
   setTimeout(() => {
-    reject(new Error('Минуло 3 секунди'));
+    reject(new Error('Promise was rejected!'));
   }, 3000);
 });
 
@@ -24,7 +24,7 @@ function createSuccessMessage(text) {
   const messageDiv = document.createElement('div');
 
   messageDiv.className = 'message';
-  messageDiv.textContent = 'Promise was resolved!';
+  messageDiv.textContent = text;
   document.body.appendChild(messageDiv);
 }
 
@@ -32,7 +32,7 @@ function createErrorMessage(erroR) {
   const messageDiv = document.createElement('div');
 
   messageDiv.className = 'message error-message';
-  messageDiv.textContent = 'Promise was rejected!';
+  messageDiv.textContent = erroR;
   document.body.appendChild(messageDiv);
 }
 
