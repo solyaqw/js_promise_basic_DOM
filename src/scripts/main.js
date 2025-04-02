@@ -1,3 +1,53 @@
 'use strict';
 
-// write your code here
+const promise1 = new Promise((resolve, reject) => {
+  const logoElement = document.querySelector('.logo');
+
+  if (!logoElement) {
+    reject(new Error('Елемент з класом .logo не знайдено'));
+
+    return;
+  }
+
+  logoElement.addEventListener('click', () => {
+    resolve('Клікнуто на логотип');
+  });
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject(new Error('Минуло 3 секунди'));
+  }, 3000);
+});
+
+function createSuccessMessage(text) {
+  const messageDiv = document.createElement('div');
+
+  messageDiv.className = 'message';
+  messageDiv.textContent = 'Promise was resolved!';
+  document.body.appendChild(messageDiv);
+}
+
+function createErrorMessage(erroR) {
+  const messageDiv = document.createElement('div');
+
+  messageDiv.className = 'message error-message';
+  messageDiv.textContent = 'Promise was rejected!';
+  document.body.appendChild(messageDiv);
+}
+
+promise1
+  .then((result) => {
+    createSuccessMessage(result);
+  })
+  .catch((error) => {
+    createErrorMessage(error);
+  });
+
+promise2
+  .then((result) => {
+    createSuccessMessage(result);
+  })
+  .catch((error) => {
+    createErrorMessage(error);
+  });
